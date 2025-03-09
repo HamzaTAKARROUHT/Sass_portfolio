@@ -1,0 +1,19 @@
+.resource-list, .exercise-list {
+    padding-left: $spacing-unit * 3;
+    
+    li {
+      margin-bottom: $spacing-unit;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+  .resource-list {
+    list-style-type: square;
+  }
+  
+  .exercise-list {
+    list-style-type: decimal;
+  }

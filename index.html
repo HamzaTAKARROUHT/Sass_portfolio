@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriel SASS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__logo">Tutoriel SASS</div>
+            <ul class="nav__menu">
+                <li class="nav__menu-item"><a href="#introduction">Introduction</a></li>
+                <li class="nav__menu-item"><a href="#variables">Variables</a></li>
+                <li class="nav__menu-item"><a href="#nesting">Nesting</a></li>
+                <li class="nav__menu-item"><a href="#mixins">Mixins</a></li>
+                <li class="nav__menu-item"><a href="#architecture">Architecture</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero__title">Tutoriel SASS</h1>
+            <p class="hero__subtitle">Apprenez SASS en explorant ce site - nous utilisons ce site comme exemple pour illustrer les concepts</p>
+            <div class="hero__actions">
+                <a href="#introduction" class="button--primary">Commencer</a>
+                <a href="#examples" class="button--secondary">Voir les exemples</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="introduction" class="section">
+            <h2 class="section__title">Introduction à SASS</h2>
+            <div class="section__content">
+                <div class="card">
+                    <h3 class="card__title">Qu'est-ce que SASS?</h3>
+                    <div class="card__content">
+                        <p>SASS (Syntactically Awesome StyleSheets) est un préprocesseur CSS qui étend les fonctionnalités du CSS standard.</p>
+                        <p>Ce site entier est stylisé avec SASS! Voyons comment certaines parties sont construites.</p>
+                        <div class="code-example">
+                            <pre><code>// Structure des fichiers SASS pour ce site
+sass/
+|– _variables.scss    // Couleurs, polices, etc.
+|– _mixins.scss       // Fonctions réutilisables
+|– _reset.scss        // Réinitialisation CSS
+|– components/        // Composants isolés
+|   |– _header.scss   // En-tête et navigation
+|   |– _button.scss   // Styles des boutons
+|   |– _card.scss     // Cartes de contenu
+|– main.scss          // Fichier principal</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="variables" class="section">
+            <h2 class="section__title">Variables SASS</h2>
+            <div class="section__content">
+                <div class="card feature-card">
+                    <h3 class="card__title">Variables utilisées sur ce site</h3>
+                    <div class="card__content">
+                        <p>Les variables SASS permettent de centraliser et réutiliser des valeurs comme les couleurs et espacements.</p>
+                        <div class="color-palette">
+                            <div class="color-sample color-sample--primary">Primaire</div>
+                            <div class="color-sample color-sample--secondary">Secondaire</div>
+                            <div class="color-sample color-sample--text">Texte</div>
+                            <div class="color-sample color-sample--light-bg">Fond clair</div>
+                        </div>
+                        <div class="code-example">
+                            <pre><code>// _variables.scss
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$text-color: #333;
+$light-bg: #f5f5f5;
+$border-radius: 4px;
+$font-stack: 'Roboto', sans-serif;
+$container-width: 1200px;
+$spacing-unit: 8px;</code></pre>
+                        </div>
+                        <p>Ces variables sont utilisées dans tous nos styles. Par exemple, le titre que vous lisez actuellement utilise <code>$primary-color</code>:</p>
+                        <div class="code-example">
+                            <pre><code>.section__title {
+  font-size: 28px;
+  margin-bottom: $spacing-unit * 4;
+  color: $primary-color;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="nesting" class="section">
+            <h2 class="section__title">Nesting (Imbrication)</h2>
+            <div class="section__content">
+                <div class="card">
+                    <h3 class="card__title">Nesting et BEM</h3>
+                    <div class="card__content">
+                        <p>L'imbrication SASS permet d'organiser les styles de façon hiérarchique. Cette carte utilise la méthodologie BEM (Block Element Modifier).</p>
+                        <div class="code-example">
+                            <pre><code>// Voici comment cette carte est stylisée
+.card {
+  background-color: white;
+  border-radius: $border-radius;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: $spacing-unit * 3;
+  
+  &__title {
+    font-size: 20px;
+    margin-bottom: $spacing-unit * 2;
+  }
+  
+  &__content {
+    margin-bottom: $spacing-unit * 2;
+  }
+  
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}</code></pre>
+                        </div>
+                        <p>Le symbole <code>&</code> fait référence au sélecteur parent. Cela se compile en CSS comme:</p>
+                        <div class="code-example">
+                            <pre><code>.card { ... }
+.card__title { ... }
+.card__content { ... }
+.card__footer { ... }</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mixins" class="section">
+            <h2 class="section__title">Mixins et fonctions</h2>
+            <div class="section__content">
+                <div class="card">
+                    <h3 class="card__title">Réutilisation de code</h3>
+                    <div class="card__content">
+                        <p>Les boutons de ce site utilisent des mixins pour éviter la répétition de code.</p>
+                        <div class="button-demo">
+                            <button class="button--primary">Bouton primaire</button>
+                            <button class="button--secondary">Bouton secondaire</button>
+                        </div>
+                        <div class="code-example">
+                            <pre><code>// _mixins.scss
+@mixin button($bg-color, $text-color) {
+  background-color: $bg-color;
+  color: $text-color;
+  padding: $spacing-unit * 2 $spacing-unit * 3;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: darken($bg-color, 10%);
+  }
+}
+
+// _button.scss
+.button {
+  &--primary {
+    @include button($primary-color, white);
+  }
+  
+  &--secondary {
+    @include button($secondary-color, white);
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card__title">Responsive avec mixins</h3>
+                    <div class="card__content">
+                        <p>Ce site est complètement responsive grâce à un mixin simple:</p>
+                        <div class="code-example">
+                            <pre><code>@mixin responsive($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (max-width: 768px) { @content; }
+  } @else if $breakpoint == mobile {
+    @media (max-width: 480px) { @content; }
+  }
+}
+
+// Utilisation
+.section__content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  
+  @include responsive(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include responsive(mobile) {
+    grid-template-columns: 1fr;
+  }
+}</code></pre>
+                        </div>
+                        <p>Redimensionnez votre navigateur pour voir le responsive en action!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="section">
+            <h2 class="section__title">Architecture SASS</h2>
+            <div class="section__content">
+                <div class="card">
+                    <h3 class="card__title">Organisation des fichiers</h3>
+                    <div class="card__content">
+                        <p>Une bonne architecture SASS aide à maintenir le code à mesure que le projet grandit. Notre site utilise une structure modulaire:</p>
+                        <div class="code-example">
+                            <pre><code>// main.scss - Le fichier qui importe tout
+@import 'variables';
+@import 'mixins';
+@import 'reset';
+@import 'components/header';
+@import 'components/button';
+@import 'components/card';
+
+// Styles spécifiques à la page
+.container {
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: $spacing-unit * 3;
+}
+
+// ...autres styles</code></pre>
+                        </div>
+                        <p>Pour compiler ce SASS en CSS, exécutez:</p>
+                        <div class="code-example">
+                            <pre><code># Compilation unique
+sass scss/main.scss css/main.css
+
+# Compilation avec surveillance des changements
+sass --watch scss/main.scss:css/main.css</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="examples" class="section">
+            <h2 class="section__title">Exemples pratiques</h2>
+            <div class="section__content">
+                <div class="card">
+                    <h3 class="card__title">Exercices</h3>
+                    <div class="card__content">
+                        <p>Essayez ces exercices pour pratiquer SASS:</p>
+                        <ol class="exercise-list">
+                            <li>Créez un nouveau mixin pour ajouter des ombres portées</li>
+                            <li>Ajoutez une variable pour une nouvelle couleur d'accent</li>
+                            <li>Créez un nouveau composant utilisant la méthodologie BEM</li>
+                            <li>Utilisez des fonctions SASS comme lighten() et darken()</li>
+                        </ol>
+                    </div>
+                    <div class="card__footer">
+                        <a href="#" class="button--primary">Plus d'exercices</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card__title">Ressources</h3>
+                    <div class="card__content">
+                        <ul class="resource-list">
+                            <li><a href="https://sass-lang.com/documentation/" target="_blank">Documentation officielle SASS</a></li>
+                            <li><a href="https://css-tricks.com/bem-101/" target="_blank">Introduction à BEM</a></li>
+                            <li><a href="https://www.sitepoint.com/architecture-sass-project/" target="_blank">Architecture des projets SASS</a></li>
+                            <li><a href="https://github.com/sass/dart-sass" target="_blank">Dart Sass (implémentation actuelle)</a></li>
+                        </ul>
+                    </div>
+                    <div class="card__footer">
+                        <a href="#" class="button--secondary">Toutes les ressources</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <p>Ce site est un exemple de tutoriel SASS.</p>
+                <p>&copy; 2025 Tutoriel SASS par TAKARROUHT Hamza. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

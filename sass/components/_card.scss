@@ -1,0 +1,36 @@
+.card {
+  background-color: white;
+  border-radius: $border-radius;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: $spacing-unit * 3;
+  margin-bottom: $spacing-unit * 3;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  &__title {
+    font-size: 20px;
+    margin-bottom: $spacing-unit * 2;
+    color: $primary-color;
+  }
+  
+  &__content {
+    margin-bottom: $spacing-unit * 2;
+    
+    p {
+      margin-bottom: $spacing-unit * 2;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  
+  &__footer {
+    @include flex-center;
+    justify-content: flex-end;
+  }
+}

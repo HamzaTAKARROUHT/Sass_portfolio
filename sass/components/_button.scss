@@ -1,0 +1,24 @@
+.button {
+  &--primary {
+    @include button($primary-color, white);
+  }
+  
+  &--secondary {
+    @include button($secondary-color, white);
+  }
+  
+  &--large {
+    font-size: 18px;
+    padding: $spacing-unit * 3 $spacing-unit * 4;
+  }
+}
+
+.button-demo {
+  display: flex;
+  gap: $spacing-unit * 2;
+  margin-bottom: $spacing-unit * 3;
+  
+  @include responsive(mobile) {
+    flex-direction: column;
+  }
+}

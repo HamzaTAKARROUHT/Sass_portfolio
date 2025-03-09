@@ -1,0 +1,91 @@
+@import 'variables';
+@import 'mixins';
+@import 'reset';
+@import 'components/header';
+@import 'components/button';
+@import 'components/card';
+@import 'components/code-examples';
+@import 'components/color-palette';
+@import 'components/lists';
+
+.container {
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: $spacing-unit * 3;
+}
+
+.section {
+  margin-bottom: $spacing-unit * 8;
+  scroll-margin-top: 80px; // Pour la navigation par ancre
+  
+  &__title {
+    font-size: 28px;
+    margin-bottom: $spacing-unit * 4;
+    color: $primary-color;
+    border-bottom: 2px solid lighten($primary-color, 30%);
+    padding-bottom: $spacing-unit;
+  }
+  
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: $spacing-unit * 3;
+  }
+}
+
+.hero {
+  background-color: $light-bg;
+  padding: $spacing-unit * 10 0;
+  margin-bottom: $spacing-unit * 5;
+  text-align: center;
+  
+  &__title {
+    font-size: 48px;
+    margin-bottom: $spacing-unit * 3;
+    color: $primary-color;
+  }
+  
+  &__subtitle {
+    font-size: 20px;
+    margin-bottom: $spacing-unit * 5;
+    color: lighten($text-color, 20%);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  &__actions {
+    .button--primary {
+      margin-right: $spacing-unit * 2;
+    }
+    
+    @include responsive(mobile) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: $spacing-unit * 2;
+      
+      .button--primary {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.footer {
+  background-color: darken($light-bg, 5%);
+  padding: $spacing-unit * 6 0;
+  margin-top: $spacing-unit * 10;
+  text-align: center;
+  color: lighten($text-color, 15%);
+  
+  &__content {
+    p {
+      margin-bottom: $spacing-unit * 2;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
